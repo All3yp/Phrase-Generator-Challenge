@@ -44,7 +44,6 @@ while (!shouldQuit) {
         print("\(option.rawValue). \(option.description)")
     }
     
-    
     if let input = readLine(),
        let selectedOption = Int(input),
        let option = MenuOption(rawValue: selectedOption) {
@@ -54,32 +53,34 @@ while (!shouldQuit) {
             print(randomPhrase)
         case .addNewPhrase:
             
-            print("Digite a nova frase:")
+            print("Digite a nova frase:\n")
             if let newPhrase = readLine() {
                 addNewPhrase(newPhrase)
-                print("Nova frase adicionada com sucesso!")
+                print("Nova frase adicionada com sucesso!\n")
             }
         case .removePhrase:
-            print("Digite a frase a ser removida:")
+            print("Digite a frase a ser removida:\n")
             if let phraseToRemove = readLine() {
                 removePhrase(phraseToRemove)
             }
         case .showAllPhrases:
             let phrases = getAllPhrases()
-            print("Lista de frases:")
+            print("Lista de frases:\n")
             for phrase in phrases {
                 print("- \(phrase)")
             }
         case .searchPhraseByKeyword:
-            print("Digite a palavra-chave:")
+            print("Digite a palavra-chave:\n")
             if let keyword = readLine() {
                 let matchingKeyword = searchPhraseByKeyword(keyword)
                 for phrase in matchingKeyword {
-                    print("Frases que contem /\(phrase)/")
+                    print("Frases que contem /\(phrase)/\n")
                 }
             }
         case .quit:
             break
         }
+    } else {
+        print("Opção invalida\n")
     }
 }
