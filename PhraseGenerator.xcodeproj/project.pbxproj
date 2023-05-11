@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		649DCF942A0AEFAC00A1088F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649DCF932A0AEFAC00A1088F /* main.swift */; };
+		649DCF9B2A0AF0C400A1088F /* Phrases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649DCF9A2A0AF0C400A1088F /* Phrases.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		649DCF902A0AEFAC00A1088F /* PhraseGenerator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PhraseGenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		649DCF932A0AEFAC00A1088F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		649DCF9A2A0AF0C400A1088F /* Phrases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phrases.swift; sourceTree = "<group>"; };
+		649DCF9E2A0B0FA400A1088F /* phrases.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = phrases.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +60,9 @@
 		649DCF922A0AEFAC00A1088F /* PhraseGenerator */ = {
 			isa = PBXGroup;
 			children = (
+				649DCF9E2A0B0FA400A1088F /* phrases.txt */,
 				649DCF932A0AEFAC00A1088F /* main.swift */,
+				649DCF9A2A0AF0C400A1088F /* Phrases.swift */,
 			);
 			path = PhraseGenerator;
 			sourceTree = "<group>";
@@ -120,6 +125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				649DCF9B2A0AF0C400A1088F /* Phrases.swift in Sources */,
 				649DCF942A0AEFAC00A1088F /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
