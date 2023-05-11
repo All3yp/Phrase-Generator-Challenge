@@ -26,7 +26,7 @@ Implementar tratamento de erros para exceções como quando o arquivo de texto n
 //  Created by userext on 10/05/23.
 //
 
-// MARK: - CODIGO DO FILE MANAGER
+// MARK: - LOOP PRA LER ARRAY DE FRASES
 
 
 //let frases = ["Eu adoro gatinhos", "Pizza de calabresa é muito bom", "Cheguei atrasado na faculdade hoje", "Queimei a língua tomando chocolate quente"]
@@ -41,9 +41,8 @@ Implementar tratamento de erros para exceções como quando o arquivo de texto n
 //
 //print(PrintarFrase(array: frases))
 
-//print("Escreve algo:")
-//let input = readLine()
-//
+// MARK: - FILE MANAGER
+
 //guard let fileURL = Bundle.main.url(forResource: "Frases", withExtension: "txt") else {
 //    fatalError("Não foi possível encontrar o arquivo.")
 //}
