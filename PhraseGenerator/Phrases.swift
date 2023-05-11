@@ -19,12 +19,6 @@ Criar uma opção de menu pro usuário pesquisar por uma palavra(?) (tinha pensa
 Implementar tratamento de erros para exceções como quando o arquivo de texto não existir ou não puder ser aberto.
 */
 
-//
-//  main.swift
-//  AtividadeTeste
-//
-//  Created by userext on 10/05/23.
-//
 
 // MARK: - LOOP PRA LER ARRAY DE FRASES
 

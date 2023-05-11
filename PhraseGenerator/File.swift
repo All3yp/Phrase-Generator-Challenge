@@ -1,35 +1,5 @@
 import Foundation
 
-struct Frase: Decodable {
-    let frases: [String]
-}
-
-
-//func getAllPhrases(completed: @escaping () -> ()) -> [String] {
-//
-//    guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("phrases.json").path else {
-//        fatalError("Não foi possível encontrar o arquivo.")
-//    }
-//
-//    let url = URL(filePath: documentsDirectory)
-//    URLSession.shared.dataTask(with: url) { (data, response, error) in
-//
-//        if error == nil {
-//            do {
-//                _ = try JSONDecoder().decode(Frase.self, from: data!)
-//                DispatchQueue.main.async {
-//                    completed()
-//                }
-//            }catch {
-//                print (error.localizedDescription)
-//            }
-//        }
-//    }.resume()
-//    return []
-//}
-    
-
-
 func readFile() {
     // Obter o caminho completo do arquivo
     guard let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("phrases.json").path else {
