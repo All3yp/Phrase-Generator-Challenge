@@ -1,5 +1,5 @@
 //
-//  NetworkingManager.swift
+//  PhrasesRequest.swift
 //  PhraseGenerator
 //
 //  Created by userext on 11/05/23.
@@ -11,11 +11,9 @@ struct Frase: Codable {
     let frases: [String]
 }
 
-class Networking {
+class PhrasesRequest {
     
-    var phrases: [String] = []
-    
-    static func getting(completion: @escaping (_ fraseArray: [String]) -> Void) {
+     func getting(completion: @escaping (_ phrase: [String]) -> Void) {
         let _: URLSession = URLSession.shared
         let readDocumentsURL = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask).first!
         let readFileURL = readDocumentsURL.appendingPathComponent("phrases.json")
@@ -29,9 +27,4 @@ class Networking {
         }
     }
     
-    func getAllPhrases() {
-        Networking.getting { frases in
-            self.phrases = frases
-        }
-    }
 }

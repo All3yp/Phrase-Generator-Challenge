@@ -8,9 +8,9 @@
 import Foundation
 
 enum MenuOption: Int, CaseIterable {
-case generateRandomPhrase = 1
-case addNewPhrase, removePhrase, showAllPhrases, searchPhraseByKeyword, quit
-
+    case generateRandomPhrase = 1
+    case addNewPhrase, removePhrase, showAllPhrases, searchPhraseByKeyword, quit
+    
     var description: String {
         switch self {
         case .generateRandomPhrase:
@@ -30,11 +30,11 @@ case addNewPhrase, removePhrase, showAllPhrases, searchPhraseByKeyword, quit
 } //:EOF Enum
 
 var shouldQuit = false
+let gettingRequest = PhrasesRequest()
 
 func generateRandomPhrase() {}
 func addNewPhrase(_ phrase: String) {}
 func removePhrase(_ phrase: String) {}
-func getAllPhrases() -> [String] { return [] }
 
 func searchPhraseByKeyword(_ phrase: String) -> [String] { return [] }
 
@@ -43,7 +43,7 @@ while (!shouldQuit) {
     for option in MenuOption.allCases {
         print("\(option.rawValue). \(option.description)")
     }
-
+    
     if let input = readLine(),
        let selectedOption = Int(input),
        let option = MenuOption(rawValue: selectedOption) {
@@ -52,7 +52,7 @@ while (!shouldQuit) {
             let randomPhrase: () = generateRandomPhrase()
             print(randomPhrase)
         case .addNewPhrase:
-
+            
             print("Digite a nova frase:\n")
             if let newPhrase = readLine() {
                 addNewPhrase(newPhrase)
@@ -64,10 +64,8 @@ while (!shouldQuit) {
                 removePhrase(phraseToRemove)
             }
         case .showAllPhrases:
-            let phrases = getAllPhrases()
-            print("Lista de frases:\n")
-            for phrase in phrases {
-                print("- \(phrase)")
+            gettingRequest.getting { phrase in
+                print("- \(phrase)\n")
             }
         case .searchPhraseByKeyword:
             print("Digite a palavra-chave:\n")
@@ -78,14 +76,9 @@ while (!shouldQuit) {
                 }
             }
         case .quit:
-            break
+            shouldQuit = true
         }
     } else {
         print("Opção invalida\n")
     }
 }
-
-
-//let networking = Networking()
-//networking.getAllPhrases()
-//print(networking)
