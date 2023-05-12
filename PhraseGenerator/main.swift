@@ -49,8 +49,9 @@ while (!shouldQuit) {
        let option = MenuOption(rawValue: selectedOption) {
         switch option {
         case .generateRandomPhrase:
-            let randomPhrase: () = generateRandomPhrase()
-            print(randomPhrase)
+            gettingRequest.getting { phrase in
+                print("- \(String(describing: phrase.randomElement()))\n")
+            }
         case .addNewPhrase:
             
             print("Digite a nova frase:\n")
