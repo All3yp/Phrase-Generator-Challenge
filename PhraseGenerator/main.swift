@@ -30,7 +30,8 @@ enum MenuOption: Int, CaseIterable {
 } //:EOF Enum
 
 var shouldQuit = false
-let gettingRequest = PhrasesRequest()
+
+let phraseRequest = PhrasesRequest()
 
 func addNewPhrase(_ phrase: String) {}
 
@@ -46,33 +47,30 @@ while (!shouldQuit) {
      let selectedOption = Int(input),
      let option = MenuOption(rawValue: selectedOption) {
     switch option {
+
     case .generateRandomPhrase:
-      gettingRequest.get { phrase in
+      phraseRequest.getPhrases({ phrase in
         print("- \(String(describing: phrase.randomElement()))\n")
-      }
+      })
+
     case .addNewPhrase:
       print("Digite a nova frase:\n")
       if let newPhrase = readLine() {
         addNewPhrase(newPhrase)
         print("Nova frase adicionada com sucesso!\n")
       }
+
     case .removePhrase:
       print("Digite a frase a ser removida:\n")
       if let phraseToRemove = readLine() {
-        gettingRequest.get { phrase in
-          if phrase.contains(phraseToRemove) {
-            gettingRequest.remove(phraseToRemove)
-            print("Frase removida com sucesso:\n")
-            print("- \(phraseToRemove)\n")
-          } else {
-            print("A frase não foi encontrada no arquivo JSON.\n")
-          }
-        }
+        phraseRequest.removePhrase(phraseToRemove)
       }
+
     case .showAllPhrases:
-      gettingRequest.get { phrase in
+      phraseRequest.getPhrases({ phrase in
         print("- \(phrase)\n")
-      }
+      })
+
     case .searchPhraseByKeyword:
       print("Digite a palavra-chave:\n")
       if let keyword = readLine() {
@@ -81,6 +79,7 @@ while (!shouldQuit) {
           print("Frases que contem /\(phrase)/\n")
         }
       }
+
     case .quit:
       shouldQuit = true
     }
