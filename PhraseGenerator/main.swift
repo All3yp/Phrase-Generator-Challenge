@@ -32,11 +32,7 @@ enum MenuOption: Int, CaseIterable {
 var shouldQuit = false
 let gettingRequest = PhrasesRequest()
 
-func generateRandomPhrase() {}
 func addNewPhrase(_ phrase: String) {}
-func removePhrase(_ phrase: String) {
-  
-}
 
 func searchPhraseByKeyword(_ phrase: String) -> [String] { return [] }
 
