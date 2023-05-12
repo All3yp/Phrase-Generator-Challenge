@@ -14,17 +14,17 @@ enum MenuOption: Int, CaseIterable {
   var description: String {
     switch self {
     case .generateRandomPhrase:
-      return "Gerar nova frase aleatória"
+        return Constants.generateRandomPhrase
     case .addNewPhrase:
-      return "Adicionar nova frase"
+        return Constants.addNewPhrase
     case .removePhrase:
-      return "Remover frase existente"
+        return Constants.removePhrase
     case .showAllPhrases:
-      return "Exibir lista de frases"
+        return Constants.showAllPhrases
     case .searchPhraseByKeyword:
-      return "Pesquisar frase por palavra-chave"
+        return Constants.searchPhraseByKeyword
     case .quit:
-      return "Sair"
+        return Constants.quit
     }
   }
 } //:EOF Enum
@@ -43,7 +43,7 @@ func searchPhraseByKeyword(_ keyword: String, _ completion: @escaping (_ results
   }
 
 while (!shouldQuit) {
-  print("Selecione uma opção:")
+    print(Constants.selectAnOption)
   for option in MenuOption.allCases {
     print("\(option.rawValue). \(option.description)")
   }
@@ -59,17 +59,17 @@ while (!shouldQuit) {
       })
       
     case .addNewPhrase:
-      print("Digite a nova frase:\n")
+        print(Constants.typeNewPhrase)
       if let newPhrase = readLine() {
         phraseRequest.getPhrases { phrases in
             let newPhrases = phrases + [newPhrase]
           phraseRequest.savePhrases(newPhrases)
         }
-        print("Nova frase adicionada com sucesso!\n")
+          print(Constants.phrasedAddedWithSucess)
       }
       
     case .removePhrase:
-      print("Digite a frase a ser removida:\n")
+        print(Constants.typePhraseToRemove)
       if let phraseToRemove = readLine() {
         phraseRequest.removePhrase(phraseToRemove)
       }
@@ -80,13 +80,13 @@ while (!shouldQuit) {
       })
       
     case .searchPhraseByKeyword:
-      print("Digite a palavra-chave:\n")
+        print(Constants.typeKeyword)
       if let keyword = readLine() {
         searchPhraseByKeyword(keyword) { results in
           if results.isEmpty {
-            print("Nenhuma frase foi encontrada com a palavra-chave especificada.")
+              print(Constants.anyPhraseNotFound)
           } else {
-            print("Frases encontradas:")
+              print(Constants.phrasesFounded)
             for phrase in results {
               print("- \(phrase)")
             }
@@ -97,6 +97,6 @@ while (!shouldQuit) {
       shouldQuit = true
     }
   } else {
-    print("Opção invalida\n")
+      print(Constants.invalidOption)
   }
 }
