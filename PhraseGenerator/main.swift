@@ -61,7 +61,10 @@ while (!shouldQuit) {
     case .addNewPhrase:
       print("Digite a nova frase:\n")
       if let newPhrase = readLine() {
-        addNewPhrase(newPhrase)
+        phraseRequest.getPhrases { phrases in
+            let newPhrases = phrases + [newPhrase]
+          phraseRequest.savePhrases(newPhrases)
+        }
         print("Nova frase adicionada com sucesso!\n")
       }
       
