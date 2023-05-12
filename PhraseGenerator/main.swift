@@ -35,7 +35,12 @@ let phraseRequest = PhrasesRequest()
 
 func addNewPhrase(_ phrase: String) {}
 
-func searchPhraseByKeyword(_ phrase: String) -> [String] { return [] }
+func searchPhraseByKeyword(_ keyword: String, _ completion: @escaping (_ results: [String]) -> Void) {
+    phraseRequest.getPhrases { phrase in
+      let results = phrase.filter { $0.lowercased().contains(keyword.lowercased()) }
+      completion(results)
+    }
+  }
 
 while (!shouldQuit) {
   print("Selecione uma opção:")
@@ -47,39 +52,44 @@ while (!shouldQuit) {
      let selectedOption = Int(input),
      let option = MenuOption(rawValue: selectedOption) {
     switch option {
-
+      
     case .generateRandomPhrase:
       phraseRequest.getPhrases({ phrase in
         print("- \(String(describing: phrase.randomElement()))\n")
       })
-
+      
     case .addNewPhrase:
       print("Digite a nova frase:\n")
       if let newPhrase = readLine() {
         addNewPhrase(newPhrase)
         print("Nova frase adicionada com sucesso!\n")
       }
-
+      
     case .removePhrase:
       print("Digite a frase a ser removida:\n")
       if let phraseToRemove = readLine() {
         phraseRequest.removePhrase(phraseToRemove)
       }
-
+      
     case .showAllPhrases:
       phraseRequest.getPhrases({ phrase in
         print("- \(phrase)\n")
       })
-
+      
     case .searchPhraseByKeyword:
       print("Digite a palavra-chave:\n")
       if let keyword = readLine() {
-        let matchingKeyword = searchPhraseByKeyword(keyword)
-        for phrase in matchingKeyword {
-          print("Frases que contem /\(phrase)/\n")
+        searchPhraseByKeyword(keyword) { results in
+          if results.isEmpty {
+            print("Nenhuma frase foi encontrada com a palavra-chave especificada.")
+          } else {
+            print("Frases encontradas:")
+            for phrase in results {
+              print("- \(phrase)")
+            }
+          }
         }
       }
-
     case .quit:
       shouldQuit = true
     }
