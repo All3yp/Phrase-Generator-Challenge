@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		640E34492A0EED5600F627BA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640E34482A0EED5600F627BA /* Constants.swift */; };
+		6414B2E22A0EF70200CAEFB0 /* MenuOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6414B2E12A0EF70200CAEFB0 /* MenuOption.swift */; };
 		649DCF942A0AEFAC00A1088F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649DCF932A0AEFAC00A1088F /* main.swift */; };
 		649DCF9B2A0AF0C400A1088F /* Phrases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649DCF9A2A0AF0C400A1088F /* Phrases.swift */; };
 		64C396FA2A0DA18D008C38B4 /* phrases.json in Sources */ = {isa = PBXBuildFile; fileRef = 641272FE2A0C727500FFAEAD /* phrases.json */; };
@@ -30,6 +31,7 @@
 /* Begin PBXFileReference section */
 		640E34482A0EED5600F627BA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		641272FE2A0C727500FFAEAD /* phrases.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = phrases.json; sourceTree = "<group>"; };
+		6414B2E12A0EF70200CAEFB0 /* MenuOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOption.swift; sourceTree = "<group>"; };
 		649DCF902A0AEFAC00A1088F /* PhraseGenerator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PhraseGenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		649DCF932A0AEFAC00A1088F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		649DCF9A2A0AF0C400A1088F /* Phrases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phrases.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 			children = (
 				641272FE2A0C727500FFAEAD /* phrases.json */,
 				649DCF932A0AEFAC00A1088F /* main.swift */,
+				6414B2E12A0EF70200CAEFB0 /* MenuOption.swift */,
 				640E34482A0EED5600F627BA /* Constants.swift */,
 				64C396FD2A0DAC3B008C38B4 /* PhrasesRequest.swift */,
 				649DCF9A2A0AF0C400A1088F /* Phrases.swift */,
@@ -146,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				640E34492A0EED5600F627BA /* Constants.swift in Sources */,
+				6414B2E22A0EF70200CAEFB0 /* MenuOption.swift in Sources */,
 				64C396FA2A0DA18D008C38B4 /* phrases.json in Sources */,
 				649DCF9B2A0AF0C400A1088F /* Phrases.swift in Sources */,
 				64C396FE2A0DAC3B008C38B4 /* PhrasesRequest.swift in Sources */,

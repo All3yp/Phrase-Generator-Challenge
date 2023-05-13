@@ -7,40 +7,22 @@
 
 import Foundation
 
-enum MenuOption: Int, CaseIterable {
-  case generateRandomPhrase = 1
-  case addNewPhrase, removePhrase, showAllPhrases, searchPhraseByKeyword, quit
-  
-  var description: String {
-    switch self {
-    case .generateRandomPhrase:
-        return Constants.generateRandomPhrase
-    case .addNewPhrase:
-        return Constants.addNewPhrase
-    case .removePhrase:
-        return Constants.removePhrase
-    case .showAllPhrases:
-        return Constants.showAllPhrases
-    case .searchPhraseByKeyword:
-        return Constants.searchPhraseByKeyword
-    case .quit:
-        return Constants.quit
-    }
-  }
-} //:EOF Enum
-
 var shouldQuit = false
 
 let phraseRequest = PhrasesRequest()
 
 func addNewPhrase(_ phrase: String) {}
 
-func searchPhraseByKeyword(_ keyword: String, _ completion: @escaping (_ results: [String]) -> Void) {
-    phraseRequest.getPhrases { phrase in
-      let results = phrase.filter { $0.lowercased().contains(keyword.lowercased()) }
-      completion(results)
-    }
+func searchPhraseByKeyword(_ keyword: String) -> [String] {
+    let phrase = phraseRequest.getPhrases2()
+    let results = phrase.filter { $0.lowercased().contains(keyword.lowercased()) }
+    return results
   }
+
+let phrases = phraseRequest.getPhrases2()
+if let randomPhrase = phrases.randomElement() {
+    print("-", randomPhrase, "\n")
+}
 
 while (!shouldQuit) {
     print(Constants.selectAnOption)
@@ -54,45 +36,45 @@ while (!shouldQuit) {
     switch option {
       
     case .generateRandomPhrase:
-      phraseRequest.getPhrases({ phrase in
-        print("- \(String(describing: phrase.randomElement()))\n")
-      })
+        if let randomPhrase = phrases.randomElement() {
+            print("-", randomPhrase, "\n")
+        }
       
     case .addNewPhrase:
         print(Constants.typeNewPhrase)
-      if let newPhrase = readLine() {
-        phraseRequest.getPhrases { phrases in
+        if let newPhrase = readLine() {
+            
+            let phrase = phraseRequest.getPhrases2()
             let newPhrases = phrases + [newPhrase]
-          phraseRequest.savePhrases(newPhrases)
+            phraseRequest.savePhrases(newPhrases)
+            print(Constants.phrasedAddedWithSucess)
         }
-          print(Constants.phrasedAddedWithSucess)
-      }
-      
     case .removePhrase:
         print(Constants.typePhraseToRemove)
       if let phraseToRemove = readLine() {
         phraseRequest.removePhrase(phraseToRemove)
       }
-      
+        
     case .showAllPhrases:
-      phraseRequest.getPhrases({ phrase in
-        print("- \(phrase)\n")
-      })
+        let array = phraseRequest.getPhrases2()
+        array.forEach { phrase in
+            print(phrase)
+        }
       
     case .searchPhraseByKeyword:
         print(Constants.typeKeyword)
       if let keyword = readLine() {
-        searchPhraseByKeyword(keyword) { results in
-          if results.isEmpty {
+          
+          let searchKey = searchPhraseByKeyword(keyword)
+          if searchKey.isEmpty {
               print(Constants.anyPhraseNotFound)
           } else {
               print(Constants.phrasesFounded)
-            for phrase in results {
+            for phrase in searchKey {
               print("- \(phrase)")
             }
           }
         }
-      }
     case .quit:
       shouldQuit = true
     }

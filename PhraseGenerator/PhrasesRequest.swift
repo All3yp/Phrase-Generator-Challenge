@@ -15,22 +15,21 @@ class PhrasesRequest {
       return FileManager.default.fileExists(atPath: readFileURL.path) ? readFileURL : nil
   }
 
-  func getPhrases(_ completion: @escaping (_ phrase: [String]) -> Void) {
-      guard let readFileURL = getURL() else {
-          completion([])
-          return
-      }
-      
-      do {
-          let data = try Data(contentsOf: readFileURL)
-          let fraseData = try JSONDecoder().decode(Phrases.self, from: data)
-          completion(fraseData.phrases)
-      } catch {
-          print(error)
-          completion([])
-      }
-  }
+    func getPhrases2() -> [String] {
+        guard let readFileURL = getURL()
+        else { return [] }
+        
+        do {
+            let data = try Data(contentsOf: readFileURL)
+            let fraseData = try JSONDecoder().decode(Phrases.self, from: data)
+            return fraseData.phrases
+        } catch {
+            print(error)
+            return []
+        }
+    }
   
+    // MARK: - AJEITA AQUI :(
   func removePhrase(_ phrase: String) {
       getPhrases { phrases in
           if phrases.contains(phrase) {
