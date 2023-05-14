@@ -29,17 +29,15 @@ class PhrasesRequest {
         }
     }
   
-    // MARK: - AJEITA AQUI :(
   func removePhrase(_ phrase: String) {
-      getPhrases { phrases in
-          if phrases.contains(phrase) {
-              let newPhrases = phrases.filter { $0 != phrase }
-            self.savePhrases(newPhrases)
-              print("A frase foi removida com sucesso.\n")
-          } else {
-              print("A frase não foi encontrada no arquivo JSON.\n")
-          }
-      }
+    let phrases = getPhrases2()
+    if phrases.contains(phrase) {
+      let newPhrases = phrases.filter { $0 != phrase }
+      self.savePhrases(newPhrases)
+      print("A frase foi removida com sucesso.\n")
+    } else {
+      print("A frase não foi encontrada no arquivo JSON.\n")
+    }
   }
   
   func savePhrases(_ phrases: [String]) {

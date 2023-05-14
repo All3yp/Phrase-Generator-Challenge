@@ -43,9 +43,8 @@ while (!shouldQuit) {
     case .addNewPhrase:
         print(Constants.typeNewPhrase)
         if let newPhrase = readLine() {
-            
             let phrase = phraseRequest.getPhrases2()
-            let newPhrases = phrases + [newPhrase]
+            let newPhrases = phrase + [newPhrase]
             phraseRequest.savePhrases(newPhrases)
             print(Constants.phrasedAddedWithSucess)
         }
