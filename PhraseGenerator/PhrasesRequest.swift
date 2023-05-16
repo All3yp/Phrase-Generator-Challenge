@@ -7,39 +7,46 @@
 
 import Foundation
 
-struct Frase: Codable {
-  let frases: [String]
-}
-
 class PhrasesRequest {
   
-  func get(completion: @escaping (_ phrase: [String]) -> Void) {
-    let _: URLSession = URLSession.shared
-    let readDocumentsURL = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask).first!
-    let readFileURL = readDocumentsURL.appendingPathComponent("phrases.json")
-    do {
-      let data = try Data(contentsOf: readFileURL)
-      let fraseData = try JSONDecoder().decode(Frase.self, from: data)
-      completion(fraseData.frases)
-    } catch {
-      print(error)
-      completion([])
+  func getURL() -> URL? {
+      let readDocumentsURL = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask).first!
+      let readFileURL = readDocumentsURL.appendingPathComponent("phrases.json")
+      return FileManager.default.fileExists(atPath: readFileURL.path) ? readFileURL : nil
+  }
+
+    func getPhrases2() -> [String] {
+        guard let readFileURL = getURL()
+        else { return [] }
+        
+        do {
+            let data = try Data(contentsOf: readFileURL)
+            let fraseData = try JSONDecoder().decode(Phrases.self, from: data)
+            return fraseData.phrases
+        } catch {
+            print(error)
+            return []
+        }
+    }
+  
+  func removePhrase(_ phrase: String) {
+    let phrases = getPhrases2()
+    if phrases.contains(phrase) {
+      let newPhrases = phrases.filter { $0 != phrase }
+      self.savePhrases(newPhrases)
+      print("A frase foi removida com sucesso.\n")
+    } else {
+      print("A frase não foi encontrada no arquivo JSON.\n")
     }
   }
   
-  func remove(_ phrase: String) {
-    get { phrases in
-      if phrases.contains(phrase) {
-        let newPhrases = phrases.filter { $0 != phrase }
-        let readDocumentsURL = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask).first!
-        let writeFileURL = readDocumentsURL.appendingPathComponent("phrases.json")
-        let newFraseData = Frase(frases: newPhrases)
-        let newFraseJSON = try! JSONEncoder().encode(newFraseData)
-        try! newFraseJSON.write(to: writeFileURL, options: .atomic)
-      } else {
-        print("A frase não foi encontrada no arquivo JSON.\n")
-      }
-    }
+  func savePhrases(_ phrases: [String]) {
+      let readDocumentsURL = FileManager.default.urls(for: .documentDirectory, in: .allDomainsMask).first!
+      let writeFileURL = readDocumentsURL.appendingPathComponent("phrases.json")
+      let newFraseData = Phrases(phrases: phrases)
+      let newFraseJSON = try! JSONEncoder().encode(newFraseData)
+      try! newFraseJSON.write(to: writeFileURL, options: .atomic)
   }
+  
   
 }
